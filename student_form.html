@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<header class="page-header compact">
+  <div>
+    <p class="eyebrow">{{ 'Edit Record' if mode == 'edit' else 'Student Registration' }}</p>
+    <h1>{{ 'Edit Student Marks' if mode == 'edit' else 'Add New Student' }}</h1>
+  </div>
+  <a href="{{ url_for('dashboard') }}" class="btn ghost">Back</a>
+</header>
+
+<section class="panel form-panel">
+  <form method="POST" class="student-form" id="studentForm">
+    <div class="grid-2">
+      <div>
+        <label>Full Name</label>
+        <input type="text" name="full_name" value="{{ student.full_name if student else '' }}" required>
+      </div>
+      <div>
+        <label>Roll Number</label>
+        <input type="text" name="roll_number" value="{{ student.roll_number if student else '' }}" required>
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" name="email" value="{{ student.email if student else '' }}">
+      </div>
+      <div>
+        <label>Department</label>
+        <input type="text" name="department" value="{{ student.department if student else 'Software Engineering' }}">
+      </div>
+      <div>
+        <label>Level</label>
+        <input type="text" name="level" value="{{ student.level if student else 'Level 7' }}">
+      </div>
+    </div>
+
+    <h3>Marks Entry</h3>
+    <div class="marks-grid">
+      {% for subject in subjects %}
+      {% set i = loop.index %}
+      <div>
+        <label>{{ subject }}</label>
+        <input type="number" min="0" max="100" name="mark{{ i }}" value="{{ student['mark' ~ i] if student else '' }}" required>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="result-preview" id="previewBox">
+      <span>Total: <b id="previewTotal">0</b></span>
+      <span>Percentage: <b id="previewPercentage">0%</b></span>
+      <span>Grade: <b id="previewGrade">-</b></span>
+    </div>
+
+    <button class="btn primary" type="submit">{{ 'Update Student' if mode == 'edit' else 'Save Student' }}</button>
+  </form>
+</section>
+{% endblock %}

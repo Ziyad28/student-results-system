@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="login-page">
+  <div class="login-card">
+    <div class="login-badge">Web Engineering Project</div>
+    <h1>Student Marks Management System</h1>
+    <p>Secure teacher/admin access for managing student marks and final results.</p>
+    <form method="POST" class="form">
+      <label>Username</label>
+      <input type="text" name="username" placeholder="admin" required>
+      <label>Password</label>
+      <input type="password" name="password" placeholder="admin123" required>
+      <button type="submit" class="btn primary full-width">Login</button>
+    </form>
+    <div class="demo-login">Default login: <b>admin</b> / <b>admin123</b></div>
+  </div>
+</section>
+{% endblock %}

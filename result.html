@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<header class="page-header compact">
+  <div>
+    <p class="eyebrow">Final Result</p>
+    <h1>{{ student.full_name }}</h1>
+    <p>Roll Number: {{ student.roll_number }}</p>
+  </div>
+  <a href="{{ url_for('dashboard') }}" class="btn ghost">Back</a>
+</header>
+
+<section class="result-card">
+  <div class="result-top">
+    <div>
+      <span>Total Marks</span>
+      <strong>{{ student.total }} / 500</strong>
+    </div>
+    <div>
+      <span>Percentage</span>
+      <strong>{{ student.percentage }}%</strong>
+    </div>
+    <div>
+      <span>Grade</span>
+      <strong>{{ student.grade }}</strong>
+    </div>
+    <div>
+      <span>Status</span>
+      <strong>{{ student.status }}</strong>
+    </div>
+  </div>
+
+  <table class="marks-table">
+    <thead><tr><th>Subject</th><th>Marks</th></tr></thead>
+    <tbody>
+      {% for subject in subjects %}
+      <tr><td>{{ subject }}</td><td>{{ student['mark' ~ loop.index] }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
